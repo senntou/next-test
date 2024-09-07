@@ -4,9 +4,14 @@ import { auth } from './firebase';
 
 export const login = (): Promise<UserCredential> => {
   const provider = new GoogleAuthProvider();
-  return signInWithPopup(auth, provider);
+  return signInWithPopup(auth, provider).then((result) => {
+    console.log('login success');
+    return result;
+  });
 };
 
 export const logout = (): Promise<void> => {
-  return signOut(auth);
+  return signOut(auth).then(() => {
+    console.log('logout success');
+  });
 };
